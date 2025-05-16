@@ -11,6 +11,10 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  background: linear-gradient(to top, #000000, #000000, #0e0d0d, #202020);
+  background-size: 100% 10px;
+  animation: scanlines infinite 10s linear;
+  box-shadow: inset -1px 11px 20px 6px #141414b6;
 
   button {
     background-color: transparent;

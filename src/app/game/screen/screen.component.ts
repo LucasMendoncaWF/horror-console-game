@@ -29,12 +29,10 @@ export class ScreenComponent {
     });
     this.subs.add(subGameOver);
 
-    const subLocation = this.gameService.currentLocation$.subscribe(location => {
-      if(location.id !== gameWorld.id) {
-        this.isContinue = true;
-      }
+    const subHasStarted = this.gameService.hasStarted$.subscribe(hasStarted => {
+        this.isContinue = hasStarted;
     });
-    this.subs.add(subLocation);
+    this.subs.add(subHasStarted);
   }
 
   allowAudio() {

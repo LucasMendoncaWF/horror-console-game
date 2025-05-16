@@ -33,6 +33,7 @@ export class GameStateService {
   private isChasing = new BehaviorSubject<boolean>(false);
   private showRunText = new BehaviorSubject<boolean>(false);
   private gameOver = new BehaviorSubject<boolean>(false);
+  private hasStarted = new BehaviorSubject<boolean>(false);
 
   currentLocation$ = this.locationSubject.asObservable();
   currentDescription$ = this.descriptionSubject.asObservable();
@@ -40,6 +41,7 @@ export class GameStateService {
   monsterDescription$ = this.monsterDescription.asObservable();
   showRunText$ = this.showRunText.asObservable();
   gameOver$ = this.gameOver.asObservable();
+  hasStarted$ = this.hasStarted.asObservable();
 
   private itemsSubject: string[] = []
   private obstaclesCompletedSubject: string[] = [];
@@ -342,7 +344,10 @@ export class GameStateService {
       const monsterLoc = this.findNodeById(gameWorld, state.monsterLocationId);
 
       if (monsterLoc) this.monsterLocation.next(monsterLoc);
-
+      if(state.currentLocationId) {
+        this.hasStarted.next(true);
+        this.descriptionSubject.next(location?.description || '');
+      }
       this.itemsSubject = state.items || [];
       this.obstaclesCompletedSubject = state.obstacles || [];
       this.monsterSpawned.next(state.monsterSpawned || false);
@@ -350,8 +355,6 @@ export class GameStateService {
       this.chasingPlayerMap = state.chasingPlayerMap || [];
       this.chasingMap = state.chasingMap || [];
       this.firstMeetWithMonster = state.firstMeetWithMonster || false;
-
-      this.descriptionSubject.next(location?.description || '');
       this.optionsSubject.next(this.generateOptions(Actions.Location));
     } catch (e) {
       console.error(e);

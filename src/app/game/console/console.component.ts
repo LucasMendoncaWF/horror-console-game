@@ -27,8 +27,12 @@ export class ConsoleComponent {
   ) {}
 
   ngOnInit() {
+    this.openFullScreen();
+
     const subDescription = this.gameService.currentDescription$.subscribe(fullText => {
       if (fullText !== this.lastFullText) {
+        const audio = document.querySelector('audio') as HTMLAudioElement;
+        audio.pause();
         this.showingText = '';
         this.completedTyping = false;
         this.textToSpeech(fullText);
@@ -74,6 +78,17 @@ export class ConsoleComponent {
         clearInterval(this.typingInterval);
       }
     }, 30);
+  }
+
+  openFullScreen() {
+    const element = document.documentElement
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if ((element as any).webkitRequestFullscreen) {
+      (element as any).webkitRequestFullscreen();
+    } else if ((element as any).msRequestFullscreen) {
+      (element as any).msRequestFullscreen();
+    }
   }
 
   ngOnDestroy() {

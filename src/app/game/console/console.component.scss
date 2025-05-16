@@ -1,23 +1,24 @@
 @use '../../../assets/variables.scss' as *;
 
 .console {
-  height: calc(40dvh - 60px);
-  width: calc(100vw - 60px);
+  box-sizing: border-box;
+  height: 45dvh;
+  width: 100vw;
   background: linear-gradient(to top, #000000, #000000, #0a0a0a, #0a0a0a);
-  background-size: 100% 5px;
+  background-size: 100% 10px;
   color: $color;
-  letter-spacing: 1px;
-  font-size: 18px;
   padding: 30px;
-  animation: scanlines infinite 15s linear;
-  box-shadow: inset -1px 11px 20px 6px #1d1d1d;
+  animation: scanlines infinite 10s linear;
+  box-shadow: inset -1px 11px 20px 6px #141414b6;
 
   @media only screen and (min-width: 768px) {
-    height: calc(30dvh - 60px);
+    height: 30dvh;
   }
 
   .current-scene-title {
-    font-size: 15px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: bold;
   }
 
   .buttons-area {
@@ -29,26 +30,35 @@
     background-color: transparent;
     border-bottom: 2px $color solid;
     border: 0;
-    padding: 10px; 
-    margin-right: 9px;
+    padding: 10px 25px;
     cursor: pointer;
     border-bottom: 1px solid transparent;
+    border-radius: 5px;
+    transition: 0.4s;
 
     &:hover {
       border-bottom: 1px solid $color;
+      box-shadow: inset -1px 1px 6px 0px $color;
     }
 
     @media only screen and (max-width: 600px) {
       width: 50%;
-      margin: 10px 0;
+      margin: 4px 0;
+      padding: 10px;
+      text-align: left;
       display: inline-block;
     }
   }
 
   .current-description {
     width: 100%;
-    max-height: 124px;
+    max-height: 100px;
     overflow-y: auto;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+
     span {
       display: inline-block;
       height: 20px;
