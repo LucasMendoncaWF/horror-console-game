@@ -22,8 +22,13 @@ export class SceneComponent {
 
   ngOnInit() {
     const subLocation = this.gameService.currentLocation$.subscribe(location => {
+      this.imageLoading = true;
 
-      
+      /*this.http.post('.netlify/functions/generateImage', { prompt: location.imageDescription }, { responseType: 'blob' })
+      .subscribe(blob => {
+        const url = URL.createObjectURL(blob);
+        this.currentImage = `url('${url}')`
+      });*/
     });
     this.subs.add(subLocation);
 

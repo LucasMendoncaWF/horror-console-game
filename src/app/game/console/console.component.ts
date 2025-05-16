@@ -48,6 +48,7 @@ export class ConsoleComponent {
   }
 
   async textToSpeech(text: string) {
+    console.log('TEST1!')
     this.http.post<Blob>('.netlify/functions/textToSpeech', {text},{ responseType: 'blob' as any }).subscribe(blob => {
       const audioUrl = URL.createObjectURL(blob);
 
