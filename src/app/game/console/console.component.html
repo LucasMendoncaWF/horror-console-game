@@ -1,0 +1,16 @@
+<div class="console">
+  <div class="current-scene-title">{{currentLocation.title}}</div>
+  <div class="current-description">
+    <p class="current-description__text">
+      {{ showingText }}
+      <span [class.completed]="completedTyping"></span>
+    </p>
+  </div>
+  <div class="buttons-area">
+    <button class="option-button" *ngFor="let option of options" (click)="option.action()">
+      <div>> {{option.title}}</div>
+    </button>
+  </div>
+  
+  <audio></audio>
+</div>

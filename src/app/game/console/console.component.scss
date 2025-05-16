@@ -1,0 +1,74 @@
+@use '../../../assets/variables.scss' as *;
+
+.console {
+  height: calc(40dvh - 60px);
+  width: calc(100vw - 60px);
+  background: linear-gradient(to top, #000000, #000000, #0a0a0a, #0a0a0a);
+  background-size: cover;
+  background-size: 100% 1px;
+  color: $color;
+  letter-spacing: 1px;
+  font-size: 18px;
+  padding: 30px;
+  animation: scanlines infinite 15s linear;
+  box-shadow: inset -1px 11px 20px 6px #1d1d1d;
+
+  @media only screen and (min-width: 768px) {
+    height: calc(30dvh - 60px);
+  }
+
+  .current-scene-title {
+    font-size: 15px;
+  }
+
+  .buttons-area {
+    width: 100%;
+  }
+
+  .option-button {
+    color: $color;
+    background-color: transparent;
+    border-bottom: 2px $color solid;
+    border: 0;
+    padding: 10px; 
+    margin-right: 9px;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-bottom: 1px solid $color;
+    }
+
+    @media only screen and (max-width: 600px) {
+      width: 50%;
+      margin: 10px 0;
+      display: inline-block;
+    }
+  }
+
+  .current-description {
+    width: 100%;
+    max-height: 124px;
+    overflow-y: auto;
+    span {
+      display: inline-block;
+      height: 20px;
+      width: 3px;
+      background-color: $color;
+      transition: 0.4s;
+      animation: blink 0.5s infinite;
+      transform: translateY(3px);
+
+      &.completed {
+        animation: none;
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@keyframes blink {
+  50% {
+    background-color: transparent;
+  }
+}

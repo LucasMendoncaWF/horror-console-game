@@ -1,0 +1,11 @@
+<div>
+  <app-scene></app-scene>
+  <ng-container *ngIf="hasAllowedAudio">
+    <app-console></app-console>
+  </ng-container>
+</div>
+
+<div class="click-to-play" *ngIf="!hasAllowedAudio">
+  <div class="game-over" *ngIf="gameOver">Game Over...</div>
+  <button (click)="allowAudio()">{{isContinue ? '> Continue' : '> Play'}}</button>
+</div>

@@ -17,6 +17,10 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@netlify/functions": "^3.1.8",
+    "dotenv": "^16.5.0",
+    "elevenlabs": "^1.59.0",
+    "netlify": "^13.3.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
