@@ -314,31 +314,33 @@ export class GameStateService {
   }
 
   // save and load 
-saveGameState() {
-  const state = {
-    currentLocationId: this.locationSubject.getValue().id,
-    items: this.itemsSubject,
-    obstacles: this.obstaclesCompletedSubject,
-    monsterLocationId: this.monsterLocation.getValue().id,
-    monsterSpawned: this.monsterSpawned.getValue(),
-    isChasing: this.isChasing.getValue(),
-    chasingPlayerMap: this.chasingPlayerMap,
-    chasingMap: this.chasingMap,
-    firstMeetWithMonster: this.firstMeetWithMonster,
-  };
-  localStorage.setItem('gameState', JSON.stringify(state));
-}
+  saveGameState() {
+    const state = {
+      currentLocationId: this.locationSubject.getValue().id,
+      items: this.itemsSubject,
+      obstacles: this.obstaclesCompletedSubject,
+      monsterLocationId: this.monsterLocation.getValue().id,
+      monsterSpawned: this.monsterSpawned.getValue(),
+      isChasing: this.isChasing.getValue(),
+      chasingPlayerMap: this.chasingPlayerMap,
+      chasingMap: this.chasingMap,
+      firstMeetWithMonster: this.firstMeetWithMonster,
+    };
+    localStorage.setItem('gameState', JSON.stringify(state));
+  }
 
-loadGameState() {
-  const stateString = localStorage.getItem('gameState');
-  if (!stateString) return;
+  loadGameState() {
+    const stateString = localStorage.getItem('gameState');
+    if (!stateString) {
+      this.updateLocation(gameWorld);
+      return;
+    }
     try {
       const state = JSON.parse(stateString);
-
       const location = this.findNodeById(gameWorld, state.currentLocationId);
+      this.updateLocation(location || gameWorld);
       const monsterLoc = this.findNodeById(gameWorld, state.monsterLocationId);
 
-      if (location) this.locationSubject.next(location);
       if (monsterLoc) this.monsterLocation.next(monsterLoc);
 
       this.itemsSubject = state.items || [];
@@ -357,7 +359,7 @@ loadGameState() {
   }
 
   resetGame() {
-    this.locationSubject.next(gameWorld);
+    this.updateLocation(gameWorld);
     this.descriptionSubject.next(gameWorld.description);
     this.itemsSubject = [];
     this.obstaclesCompletedSubject = [];

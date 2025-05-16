@@ -13,7 +13,6 @@ exports.handler = async function(event: HandlerEvent) {
     }
     const { text } = JSON.parse(event.body || '');
 
-    console.log("TEST!")
     const client = new ElevenLabsClient();
     const audio = await client.textToSpeech.convert('j9jfwdrw7BRfcR43Qohk', {
       text: text,

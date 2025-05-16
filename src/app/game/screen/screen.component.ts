@@ -30,7 +30,6 @@ export class ScreenComponent {
     this.subs.add(subGameOver);
 
     const subLocation = this.gameService.currentLocation$.subscribe(location => {
-      console.log(location.id, gameWorld.id)
       if(location.id !== gameWorld.id) {
         this.isContinue = true;
       }

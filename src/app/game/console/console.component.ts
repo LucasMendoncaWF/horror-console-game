@@ -27,9 +27,7 @@ export class ConsoleComponent {
   ) {}
 
   ngOnInit() {
-    console.log('TEST1 init')
     const subDescription = this.gameService.currentDescription$.subscribe(fullText => {
-      console.log(fullText, this.lastFullText)
       if (fullText !== this.lastFullText) {
         this.showingText = '';
         this.completedTyping = false;
@@ -50,7 +48,6 @@ export class ConsoleComponent {
   }
 
   async textToSpeech(text: string) {
-    console.log('TEST1!')
     this.http.post<Blob>('.netlify/functions/textToSpeech', {text},{ responseType: 'blob' as any }).subscribe(blob => {
       const audioUrl = URL.createObjectURL(blob);
 
