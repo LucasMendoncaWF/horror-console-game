@@ -27,6 +27,7 @@ export class ConsoleComponent {
   ) {}
 
   ngOnInit() {
+    console.log('TEST1 init')
     const subDescription = this.gameService.currentDescription$.subscribe(fullText => {
       if (fullText !== this.lastFullText) {
         this.showingText = '';
